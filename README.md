@@ -16,5 +16,6 @@ Light theme:
 pip install PyQt5
 pip install pyqtdarktheme
 pip install pymediainfo
+pip install pyinstaller #only needed if you want to build the project into executable
 ```
-only needed if you want to build the project into executable 
+
