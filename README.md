@@ -18,7 +18,7 @@ Example for KDE plasme:
 1. Run executable, go to "file" menu, click "open" and select mediafile.
    
    OR
-3. Run the executable with path to mediafile as first argument, for connivance use "open with..." from right click menu and select path to your mediainfo-gui executable. For more permanent solution right click on mediafile, go to "propertys" click on "change" button click "add" and enter path to mediainfo-gui executable. You also can add the executable to PATH.
+3. Run the executable with path to mediafile as first argument, for connivance use "open with..." from right click menu and select path to your mediainfo-gui executable. For more permanent solution right click on mediafile, go to "properties" click on "change" button click "add" and enter path to mediainfo-gui executable. You also can add the executable to PATH.
   
 # [Download links](https://github.com/hopper775/mediainfo-GUI/releases)
 
