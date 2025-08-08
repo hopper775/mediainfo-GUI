@@ -77,8 +77,6 @@ class MainWindow(QMainWindow):
         dec_btn.clicked.connect(self.font_size_minus)
         dec_action.setDefaultWidget(dec_btn)
         appearance_menu.addAction(dec_action)
-        #appearance_menu.addAction("Increase font size", self.font_size_plus)
-        #appearance_menu.addAction("Reduce font size", self.font_size_minus)
         match self.settings.value("theme"):
             case "light":
                 qdarktheme.setup_theme("light")
