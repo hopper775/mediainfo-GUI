@@ -6,7 +6,6 @@ from PyQt5.QtGui import QFont
 from mediainfo_parser import get_mediainfo_data
 from ui_tableWiget import tableWidget
 
-
 class MainWindow(QMainWindow):
     def __init__ (self, filename):
         super().__init__()
@@ -130,9 +129,27 @@ class MainWindow(QMainWindow):
         msg_box.exec()
 
     def open_file(self):
-        filename, _ = QFileDialog.getOpenFileName()
+        #HAS ISSUES
+        #drop down menu in the file picker takes up WAYY too much horizontal space
+        video_exts = "*.mxf *.mkv *.ogm *.avi *.divx *.wmv *.mov *.rv *.mpg *.mpeg *.mp4 *.vob *.xvid *.asp *.m4v"
+        audio_exts = "*.ogg *.mp3 *.wav *.ra *.ac3 *.dts *.aac *.m4a *.au *.aiff *.aif *.opus"
+        subtitle_exts = "*.srt *.ssa *.ass *.smi"
+        all_exts = " ".join([video_exts, audio_exts, subtitle_exts])
+        file_filter = [
+            f"Video files ({video_exts})",
+            f"Audio files ({audio_exts})",
+            f"Subtitle files ({subtitle_exts})",
+            f"All supported files ({all_exts})",
+            "All files (*)"
+        ]
+        file_dialog = QFileDialog()
+        file_dialog.setNameFilters(file_filter)
+        file_dialog.selectNameFilter(file_filter[3]) #"All supported files" is the default filter
+        file_dialog.setFileMode(QFileDialog.FileMode.ExistingFile)
+        file_dialog.exec_()
+        filename = file_dialog.selectedFiles()
+        filename = filename[0] if len(filename) == 1 else ""
         if filename:
-            print(filename)
             self.setWindowTitle (f"Mediainfo GUI - {filename}")
             self.data = get_mediainfo_data(filename)
             self.redraw_tabs()
