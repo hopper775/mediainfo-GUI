@@ -55,4 +55,4 @@ main.exe
 ```
 # TODO
 1. Proper installer
-2. Filter files in file picker
+2. Icon
