@@ -1,5 +1,6 @@
 import sys
 import qdarktheme
+import os
 from PyQt5.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QPushButton, QFileDialog, QMessageBox, QActionGroup, QAction, QWidgetAction
 from PyQt5.QtCore import Qt, QSettings
 from PyQt5.QtGui import QFont
@@ -18,6 +19,7 @@ class MainWindow(QMainWindow):
         self.initUI(get_mediainfo_data(filename))
 
     def initUI(self, data):
+        self.setAcceptDrops(True)
         self.data = data
         self.settings = QSettings("hopper775", "mediainfogui")
         saved_font_size = self.settings.value("font_size")
@@ -152,3 +154,39 @@ class MainWindow(QMainWindow):
             self.setWindowTitle (f"Mediainfo GUI - {filename}")
             self.data = get_mediainfo_data(filename)
             self.redraw_tabs()
+
+    def dragEnterEvent(self, event):
+            if event.mimeData().hasUrls():
+                urls = event.mimeData().urls()
+                if urls:
+                    if os.path.isfile(urls[0].toLocalFile()):
+                        event.accept()
+                else:
+                    event.ignore()
+            else:
+                event.ignore()
+
+    def dragMoveEvent(self, event):
+            if event.mimeData().hasUrls():
+                urls = event.mimeData().urls()
+                if urls:
+                    if os.path.isfile(urls[0].toLocalFile()):
+                        event.setDropAction(Qt.CopyAction)
+                        event.accept()
+                else:
+                    event.ignore()
+            else:
+                event.ignore()
+
+    def dropEvent(self, event):
+        if event.mimeData().hasUrls():
+            event.setDropAction(Qt.CopyAction)
+            filename = event.mimeData().urls()[0].toLocalFile() #if more then 1 file is dropped select first one
+            if os.path.isfile(filename): #ignor folders
+                event.setDropAction(Qt.CopyAction)
+                event.accept()
+                self.setWindowTitle (f"Mediainfo GUI - {filename}")
+                self.data = get_mediainfo_data(filename)
+                self.redraw_tabs()
+            else:
+                event.ignore()

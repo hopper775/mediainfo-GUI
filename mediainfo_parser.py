@@ -22,7 +22,7 @@ def get_mediainfo_data(filename):
                     image_data = mediainfo.image_tracks[0].to_data()
                 case "Menu":
                     menu_data = mediainfo.menu_tracks[0].to_data()
-                case "Text": #not tested, do not have mediafiles with this
+                case "Text":
                     text_data = mediainfo.text_tracks[0].to_data()
                 case "Other":
                     other_data = mediainfo.other_tracks[0].to_data()
