@@ -5,6 +5,8 @@ def get_mediainfo_data(filename):
     video_data = {}
     audio_data = {}
     image_data = {}
+    menu_data = {}
+    text_data = {}
     other_data = {}
     if filename:
         mediainfo = MediaInfo.parse(filename, full=False)
@@ -18,6 +20,10 @@ def get_mediainfo_data(filename):
                     video_data = mediainfo.video_tracks[0].to_data()
                 case "Image":
                     image_data = mediainfo.image_tracks[0].to_data()
+                case "Menu":
+                    menu_data = mediainfo.menu_tracks[0].to_data()
+                case "Text":
+                    text_data = mediainfo.text_tracks[0].to_data()
                 case "Other":
                     other_data = mediainfo.other_tracks[0].to_data()
 
@@ -26,5 +32,7 @@ def get_mediainfo_data(filename):
         "video": video_data,
         "audio": audio_data,
         "image": image_data,
+        "menu": menu_data,
+        "text": text_data,
         "other": other_data
         }

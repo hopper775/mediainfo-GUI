@@ -1,11 +1,11 @@
 import sys
 import qdarktheme
+import os
 from PyQt5.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QPushButton, QFileDialog, QMessageBox, QActionGroup, QAction, QWidgetAction
 from PyQt5.QtCore import Qt, QSettings
 from PyQt5.QtGui import QFont
 from mediainfo_parser import get_mediainfo_data
 from ui_tableWiget import tableWidget
-
 
 class MainWindow(QMainWindow):
     def __init__ (self, filename):
@@ -19,6 +19,7 @@ class MainWindow(QMainWindow):
         self.initUI(get_mediainfo_data(filename))
 
     def initUI(self, data):
+        self.setAcceptDrops(True)
         self.data = data
         self.settings = QSettings("hopper775", "mediainfogui")
         saved_font_size = self.settings.value("font_size")
@@ -44,10 +45,9 @@ class MainWindow(QMainWindow):
         menuBar = self.menuBar()
 
         file_menu = menuBar.addMenu('File')
-        file_menu.addAction("Open", self.open_file)
+        file_menu.addAction("Open", self.open_file, "Ctrl+O")
         file_menu.addSeparator()
-        file_menu.addAction("Exit", self.close)
-
+        file_menu.addAction("Exit", self.close, "Esc")
         appearance_menu = menuBar.addMenu("Appearance")
         theme_group = QActionGroup(self)
         theme_group.setExclusive(True)
@@ -77,8 +77,6 @@ class MainWindow(QMainWindow):
         dec_btn.clicked.connect(self.font_size_minus)
         dec_action.setDefaultWidget(dec_btn)
         appearance_menu.addAction(dec_action)
-        #appearance_menu.addAction("Increase font size", self.font_size_plus)
-        #appearance_menu.addAction("Reduce font size", self.font_size_minus)
         match self.settings.value("theme"):
             case "light":
                 qdarktheme.setup_theme("light")
@@ -126,15 +124,69 @@ class MainWindow(QMainWindow):
     def show_about(self):
         msg_box = QMessageBox(self)
         msg_box.setWindowTitle("About")
-        msg_box.setText(f"Simple alternative GUI for mediainfo application build using Python & PyQt5\nFont size: {self.font_size};\nHost OS: {sys.platform}.")
+        msg_box.setText(f"Simple alternative GUI for mediainfo application build using Python & PyQt5\nGithub: https://github.com/hopper775/mediainfo-GUI\n\nFont size: {self.font_size};\nHost OS: {sys.platform}.")
         msg_box.setIcon(QMessageBox.Icon.Information)
         msg_box.setFont(self.font)
         msg_box.exec()
 
     def open_file(self):
-        filename, _ = QFileDialog.getOpenFileName()
+        #HAS ISSUES
+        #drop down menu in the file picker takes up WAYY too much horizontal space
+        video_exts = "*.mxf *.mkv *.ogm *.avi *.divx *.wmv *.mov *.rv *.mpg *.mpeg *.mp4 *.vob *.xvid *.asp *.m4v"
+        audio_exts = "*.ogg *.mp3 *.wav *.ra *.ac3 *.dts *.aac *.m4a *.au *.aiff *.aif *.opus"
+        subtitle_exts = "*.srt *.ssa *.ass *.smi"
+        all_exts = " ".join([video_exts, audio_exts, subtitle_exts])
+        file_filter = [
+            f"Video files ({video_exts})",
+            f"Audio files ({audio_exts})",
+            f"Subtitle files ({subtitle_exts})",
+            f"All supported files ({all_exts})",
+            "All files (*)"
+        ]
+        file_dialog = QFileDialog()
+        file_dialog.setNameFilters(file_filter)
+        file_dialog.selectNameFilter(file_filter[3]) #"All supported files" is the default filter
+        file_dialog.setFileMode(QFileDialog.FileMode.ExistingFile)
+        file_dialog.exec_()
+        filename = file_dialog.selectedFiles()
+        filename = filename[0] if len(filename) == 1 else ""
         if filename:
-            print(filename)
             self.setWindowTitle (f"Mediainfo GUI - {filename}")
             self.data = get_mediainfo_data(filename)
             self.redraw_tabs()
+
+    def dragEnterEvent(self, event):
+            if event.mimeData().hasUrls():
+                urls = event.mimeData().urls()
+                if urls:
+                    if os.path.isfile(urls[0].toLocalFile()):
+                        event.accept()
+                else:
+                    event.ignore()
+            else:
+                event.ignore()
+
+    def dragMoveEvent(self, event):
+            if event.mimeData().hasUrls():
+                urls = event.mimeData().urls()
+                if urls:
+                    if os.path.isfile(urls[0].toLocalFile()):
+                        event.setDropAction(Qt.CopyAction)
+                        event.accept()
+                else:
+                    event.ignore()
+            else:
+                event.ignore()
+
+    def dropEvent(self, event):
+        if event.mimeData().hasUrls():
+            event.setDropAction(Qt.CopyAction)
+            filename = event.mimeData().urls()[0].toLocalFile() #if more then 1 file is dropped select first one
+            if os.path.isfile(filename): #ignor folders
+                event.setDropAction(Qt.CopyAction)
+                event.accept()
+                self.setWindowTitle (f"Mediainfo GUI - {filename}")
+                self.data = get_mediainfo_data(filename)
+                self.redraw_tabs()
+            else:
+                event.ignore()

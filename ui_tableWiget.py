@@ -14,6 +14,8 @@ class tableWidget(QWidget):
         audio = data.get("audio", {})
         video = data.get("video", {})
         image = data.get("image", {})
+        menu = data.get("menu", {})
+        text = data.get("text", {})
         other = data.get("other", {})
 
         if general:
@@ -28,6 +30,12 @@ class tableWidget(QWidget):
         if video:
             self.fill_tab("Video", video)
 
+        if menu:
+            self.fill_tab("Menu", menu)
+
+        if text:
+            self.fill_tab("Text", text)
+            
         if other:
             self.fill_tab("Other", other)
 
