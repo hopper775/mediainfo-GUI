@@ -1,10 +1,10 @@
-Simple alternative GUI for mediainfo based on Python and PyQt5
 # Why?
 I do not like the official one plus just started learning programming so i decided to make it as a practice project because this is something i will actualy use. Also as this is one of my first "complex" projects it probably is written horribly.
 
 # Futures:
 * Dark theme
 * Light theme
+* Drag and drop
 * Adjustable font size
 * Cross-platform (tested on Windows/Linux, don`t have Mac but should work)
   
