@@ -124,7 +124,7 @@ class MainWindow(QMainWindow):
     def show_about(self):
         msg_box = QMessageBox(self)
         msg_box.setWindowTitle("About")
-        msg_box.setText(f"Simple alternative GUI for mediainfo application build using Python & PyQt5\nFont size: {self.font_size};\nHost OS: {sys.platform}.")
+        msg_box.setText(f"Simple alternative GUI for mediainfo application build using Python & PyQt5\nGithub: https://github.com/hopper775/mediainfo-GUI\n\nFont size: {self.font_size};\nHost OS: {sys.platform}.")
         msg_box.setIcon(QMessageBox.Icon.Information)
         msg_box.setFont(self.font)
         msg_box.exec()
