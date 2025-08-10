@@ -20,7 +20,7 @@ def get_mediainfo_data(filename):
                     video_data = mediainfo.video_tracks[0].to_data()
                 case "Image":
                     image_data = mediainfo.image_tracks[0].to_data()
-                case "Menu": #not tested, do not have mediafiles with this
+                case "Menu":
                     menu_data = mediainfo.menu_tracks[0].to_data()
                 case "Text": #not tested, do not have mediafiles with this
                     text_data = mediainfo.text_tracks[0].to_data()

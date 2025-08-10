@@ -43,10 +43,9 @@ class MainWindow(QMainWindow):
         menuBar = self.menuBar()
 
         file_menu = menuBar.addMenu('File')
-        file_menu.addAction("Open", self.open_file)
+        file_menu.addAction("Open", self.open_file, "Ctrl+O")
         file_menu.addSeparator()
-        file_menu.addAction("Exit", self.close)
-
+        file_menu.addAction("Exit", self.close, "Esc")
         appearance_menu = menuBar.addMenu("Appearance")
         theme_group = QActionGroup(self)
         theme_group.setExclusive(True)
