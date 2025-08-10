@@ -14,13 +14,16 @@ I do not like the official one plus just started learning programming so i decid
 * ~100Mb of disk space
 
 # Usege
- For any OS:
-1. Run executable, go to "file" menu, click "open" and select mediafile.
-   
-   OR
+ * Run executable:
 
-   Example for KDE plasme:
-3. Run the executable with path to mediafile as first argument, for connivance use "open with..." from right click menu and select path to your mediainfo-gui executable. For more permanent solution right click on mediafile, go to "properties" click on "change" button click "add" and enter path to mediainfo-gui executable. You also can add the executable to PATH.
+     * drag and drop your file into main window
+
+       OR
+   
+     * go to "file" menu, click "open" and select mediafile.
+
+
+  * Run the executable with path to mediafile as first argument, for connivance use "open with..." from right click menu and select path to your mediainfo-gui executable. For more permanent solution right click on mediafile, go to "properties" click on "change" button click "add" and enter path to mediainfo-gui executable. You also can add the executable to PATH.(EXAMPLE FOR KDE PLASMA, BUT THE PROCESS IS VERY SIMULAR ON OTHER DEs AND OSs)
   
 # [Download links](https://github.com/hopper775/mediainfo-GUI/releases)
 
