@@ -5,6 +5,7 @@ I do not like the official one plus just started learning programming so i decid
 * Dark theme
 * Light theme
 * Drag and drop
+* Context menu entry(Windows setup only)
 * Adjustable font size
 * Cross-platform (tested on Windows/Linux, don`t have Mac but should work)
   
@@ -13,17 +14,14 @@ I do not like the official one plus just started learning programming so i decid
 * Linux x64 (tested on Debian 12)
 * ~100Mb of disk space
 
-# Usege
- * Run executable:
+# Usage
+Windows:
+  * Install using setup
+  * Right-click on file -> Open witn -> mediainfo GUI
+   ![2025-08-12_13-03](https://github.com/user-attachments/assets/6edc1e34-3241-417a-8121-aab05c8f4359)
 
-     * drag and drop your file into main window
-
-       OR
-   
-     * go to "file" menu, click "open" and select mediafile.
-
-
-  * Run the executable with path to mediafile as first argument, for connivance use "open with..." from right click menu and select path to your mediainfo-gui executable. For more permanent solution right click on mediafile, go to "properties" click on "change" button click "add" and enter path to mediainfo-gui executable. You also can add the executable to PATH.(EXAMPLE FOR KDE PLASMA, BUT THE PROCESS IS VERY SIMULAR ON OTHER DEs AND OSs)
+Linux/KDE Plasma:
+  * Run the executable with path to mediafile as first argument, for connivance use "open with..." from right click menu and select path to your mediainfo-gui executable. For more permanent solution right click on mediafile, go to "properties" click on "change" button click "add" and enter path to mediainfo-gui executable. You also can add the executable to PATH.
   
 # [Download links](https://github.com/hopper775/mediainfo-GUI/releases)
 
@@ -57,5 +55,5 @@ cd dist
 main.exe
 ```
 # TODO
-1. Proper installer
+1. install script for Linux
 2. Icon
