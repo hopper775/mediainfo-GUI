@@ -133,19 +133,21 @@ class MainWindow(QMainWindow):
         #HAS ISSUES
         #drop down menu in the file picker takes up WAYY too much horizontal space
         video_exts = "*.mxf *.mkv *.ogm *.avi *.divx *.wmv *.mov *.rv *.mpg *.mpeg *.mp4 *.vob *.xvid *.asp *.m4v"
+        image_exts = "*.jpg *.jpeg *.png *.gif *.bmp *.tif *.tiff *.webp *.heif *.heic *.avif *.jxl *.jp2 *.dds *.tga *.exr *.hdr *.psd *.xcf *.svg *.ai *.eps"
         audio_exts = "*.ogg *.mp3 *.wav *.ra *.ac3 *.dts *.aac *.m4a *.au *.aiff *.aif *.opus"
         subtitle_exts = "*.srt *.ssa *.ass *.smi"
-        all_exts = " ".join([video_exts, audio_exts, subtitle_exts])
+        all_exts = " ".join([video_exts, image_exts, audio_exts, subtitle_exts])
         file_filter = [
             f"Video files ({video_exts})",
             f"Audio files ({audio_exts})",
+            f"Image files ({image_exts})",
             f"Subtitle files ({subtitle_exts})",
             f"All supported files ({all_exts})",
             "All files (*)"
         ]
         file_dialog = QFileDialog()
         file_dialog.setNameFilters(file_filter)
-        file_dialog.selectNameFilter(file_filter[3]) #"All supported files" is the default filter
+        file_dialog.selectNameFilter(file_filter[4]) #"All supported files" is the default filter
         file_dialog.setFileMode(QFileDialog.FileMode.ExistingFile)
         file_dialog.exec_()
         filename = file_dialog.selectedFiles()

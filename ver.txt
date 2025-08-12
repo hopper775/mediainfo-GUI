@@ -1,0 +1,31 @@
+VSVersionInfo(
+  ffi=FixedFileInfo(
+    filevers=(1, 0, 0, 0),
+    prodvers=(1, 0, 0, 0),
+    mask=0x3f,
+    flags=0x0,
+    OS=0x40004,
+    fileType=0x1,
+    subtype=0x0,
+    date=(0, 0)
+    ),
+  kids=[
+    StringFileInfo(
+      [
+        StringTable(
+          '040904b0',
+          [ 
+            StringStruct('CompanyName', 'hopper775'),
+            StringStruct('FileDescription', 'MediaInfo GUI'),
+            StringStruct('FileVersion', '2.1.0.0'),
+            StringStruct('InternalName', 'mediainfo-gui'),
+            StringStruct('LegalCopyright', ''),
+            StringStruct('OriginalFilename', 'mediainfo-gui.exe'),
+            StringStruct('ProductName', 'MediaInfo GUI'),
+            StringStruct('ProductVersion', '2.1.0.0'),
+          ])
+      ]
+    ),
+    VarFileInfo([VarStruct('Translation', [1033, 1200])])
+  ]
+)
